@@ -1,0 +1,17 @@
+header{
+	height: 100px;
+}
+
+.searchresult{
+	overflow-y: scroll;
+	height:350px;
+}
+
+.container.searchresults{
+	margin-top:8%;
+}
+
+#map{
+	width:500px;
+	height:380px;
+}
