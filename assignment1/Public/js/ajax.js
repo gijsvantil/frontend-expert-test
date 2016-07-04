@@ -3,22 +3,27 @@ const source = 'https://www.deskbookers.com/nl-nl/sajax.json?q=Amsterdam&type=-&
 // Empty array for searchresults
 let searchresults = []
 // Empty object for location coordinates
-let coordinates = {
-	latitude: "",
-	longitude: ""
-}
+let coordinates = {}
 
 $(document).ready( () => {
 	console.log ("DOM is ready")
+	// Google Maps set up
+	const mapCanvas = document.getElementById("map");
+	let mapOptions = {
+	    center: new google.maps.LatLng(52.37, 4.89), zoom: 13
+	}
+	let map = new google.maps.Map(mapCanvas, mapOptions);
 	// Show searchresult on button click
 		$('button').click(() => {
 			$('button').hide({
 			})
+	// AJAX call, loads JSON in empty variable
 			$.get(source, (data) => {
 				searchresults = data
-				// loop through searchresults
+				// loop through searchresults variable
 				for (i = 0; i < searchresults.rows.length; i++){
-					let coordinates = [searchresults.rows[i].coordinate[0],searchresults.rows[i].coordinate[1]]
+					coordinates.latitude = searchresults.rows[i].coordinate[0]
+					coordinates.longitude = searchresults.rows[i].coordinate[1]
 					let img ="<img src=\"" + searchresults.rows[i].image_urls[0] + "\" width=180, height=120 ><p>"
 					let deskname = "<p><b>Deskname: </b>" + searchresults.rows[i].name+ "</p>"
 					let locationName = "<h3><b>" + searchresults.rows[i].location_name+ "</b></h3>"
@@ -26,14 +31,25 @@ $(document).ready( () => {
 					let maximumCapacity = "<p><b>Maximum capacity: </b>" + searchresults.rows[i].maximum_capacity + "</p>"
 					let map = "<a (href='#')><p> show on map </p></a>"
 					// Append searchresult to new div
-					$('.searchresult').append("<div class=\"jumbotron\">" + locationName + map + img + deskname + city + maximumCapacity + "</div>")
+					$('.searchresult').append(
+						"<div class=\"jumbotron\">" + 
+						locationName + 
+						map + 
+						img + 
+						deskname + 
+						city + 
+						maximumCapacity + 
+						"<input type=\"hidden\", value=\"" + coordinates.latitude + "\">" +
+						"<input type=\"hidden\", value=\"" + coordinates.longitude + "\">" +
+						"</div>" 
+						)
+   					let myLatLng = new google.maps.LatLng(coordinates[0], coordinates[1]);
+    				let marker = new google.maps.Marker({
+        					position: myLatLng,
+        					map: map,
+    					});	
 				};
 			});
 		});
-	// Google Maps set up
-	const mapCanvas = document.getElementById("map");
-	let mapOptions = {
-	    center: new google.maps.LatLng(52.37, 4.89), zoom: 13
-	}
-	let map = new google.maps.Map(mapCanvas, mapOptions);
+
 });

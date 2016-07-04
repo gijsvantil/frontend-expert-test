@@ -38,7 +38,10 @@ img {
 
 /*MAP*/
 #map{
+	padding: 10px;
+	margin-left:10px;
+	margin-right:10px;
 	border-radius: 6px;
-	width:500px;
+	width: 500px;
 	height:380px;
 }
