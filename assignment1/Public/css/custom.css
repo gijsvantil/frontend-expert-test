@@ -27,7 +27,7 @@ button.btn.btn-lg.btn-primary.btn-block{
 
 .searchresult{
 	overflow-y: scroll;
-	width: 500px;
+	min-width: 500px;
 	height:380px;
 }
 /*SINGLE SEARCHRESULT*/
@@ -42,6 +42,6 @@ img {
 	margin-left:10px;
 	margin-right:10px;
 	border-radius: 6px;
-	width: 500px;
-	height:380px;
+	min-width: 500px;
+	min-height:380px;
 }
