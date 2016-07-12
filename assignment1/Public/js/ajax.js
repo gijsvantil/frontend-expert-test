@@ -9,7 +9,7 @@ $(document).ready( function() {
 	// Google Maps set up
 	const mapCanvas = document.getElementById("map");
 	let mapOptions = {
-		center: new google.maps.LatLng(52.37, 4.89), zoom: 12
+		center: new google.maps.LatLng(52.37, 4.89), zoom: 10
 	}
 	let map = new google.maps.Map(mapCanvas, mapOptions);
 	// Show searchresult on button click
